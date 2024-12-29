@@ -12,6 +12,6 @@ namespace BLL.AbstractService
         Task AddPostAsync(PostDto postDto);
         Task UpdatepostAsync(PostDto postDto, int Id);
         Task DeletePostAsync(int Id);
-        Task<List<UserDto>> GetAllPostAsync();
+        Task<List<PostDto>> GetAllPostAsync();
     }
 }

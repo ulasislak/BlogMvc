@@ -10,12 +10,10 @@ namespace BLL.AllDto
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public DateOnly PublishedAt { get; set; }
+        public DateOnly? PublishedAt { get; set; }
         public string Tags { get; set; }
-        public string Views { get; set; }
-        public int? UserId { get; set; }
-        public int? GuestId { get; set; }
-        public UserDto Users { get; set; }
+        public string? Views { get; set; }       
+        public int? GuestId { get; set; }    
         public GuestDto Guests { get; set; }
     }
 }

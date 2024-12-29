@@ -1,46 +1,144 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BlogMvc</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BlogMvc.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Ulasium</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Stiller */
+        html, body {
+            height: 100%; /* Sayfanın tamamını kapla */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9; /* Tüm sayfanın arka plan rengi */
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            color: #333333;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+            .nav-link:hover {
+                color: #007BFF;
+            }
+
+        /* Buton Stilleri */
+        .btn-black {
+            font-size: 14px;
+            padding: 8px 20px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            .btn-black:hover {
+                background-color: #ffffff;
+                color: #000000;
+                border: 1px solid #000000;
+            }
+
+        /* Footer */
+        .footer {
+            background-color: #ffffff;
+            padding: 40px 20px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            margin-top: auto; /* Footer'ı sayfanın en altına yapıştır */
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+            .footer-links a {
+                font-size: 14px;
+                color: #333333;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+
+                .footer-links a:hover {
+                    color: #007BFF;
+                }
+
+        .footer p {
+            font-size: 14px;
+            color: #777777;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BlogMvc</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="/">Ulasium</a>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="#">Our Story</a>
+                    <a class="nav-link" href="#">Membership</a>
+                    <a class="nav-link" href="@Url.Action("Register", "Guest")">Write</a>                   
+                    <a href="@Url.Action("Login" ,"Guest")" class="nav-link">Sign In</a>
+                   
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <!-- Main Content -->
+    <div class="container flex-grow-1">
+        @RenderBody()
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - BlogMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="footer-links">
+                <a href="#">Help</a>
+                <a href="#">Status</a>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Blog</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Text to Speech</a>
+                <a href="#">Teams</a>
+            </div>
+            <p>&copy; 2025 Ulasium. All rights reserved.</p>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -36,6 +36,12 @@ namespace BLL.ConcreteService
             return _mapper.Map<List<GuestDto>>(await _genericRepository.GetAllAsync());
         }
 
+        public async Task<GuestDto> GetGuestByIdAsync(int Id)
+        {
+            var GetId=await _genericRepository.GetByIdAsync(Id);
+            return _mapper.Map<GuestDto>(GetId);
+        }
+
         public async Task UpdateGuestAsync(GuestDto guestDto, int Id)
         {
             await _genericRepository.UpdateAsync(_mapper.Map<Guest>(guestDto), Id);

@@ -1,4 +1,7 @@
+using AutoMapper;
+using BLL.AbstractService;
 using BlogMvc.Models;
+using BlogMvc.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +10,20 @@ namespace BlogMvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IPostService _postService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IPostService postService,IMapper mapper)
         {
             _logger = logger;
+            _postService = postService;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var posts=await _postService.GetAllPostAsync();
+            return View(_mapper.Map<List<PostViewModel>>(posts));
         }
 
         public IActionResult Privacy()

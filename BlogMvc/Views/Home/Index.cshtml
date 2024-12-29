@@ -1,8 +1,121 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model List<BlogMvc.ViewModel.PostViewModel>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<style>
+    /* Hero Section */
+    .hero-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Sayfanın tamamını kapla */
+        text-align: center;
+        background-color: #f9f9f9;
+    }
+
+        .hero-section h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-family: 'Merriweather', serif;
+        }
+
+        .hero-section .lead {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+    /* Makaleler Bölümü */
+    .articles-section {
+        padding: 60px 20px;
+        background-color: #fff;
+    }
+
+    .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .article-card {
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    .article-content {
+        padding: 20px;
+    }
+
+    .article-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .article-description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    .article-author {
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+    }
+
+    /* Buton Stili */
+    .btn-black {
+        padding: 12px 24px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-black:hover {
+            background-color: #333;
+        }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container text-center">
+        <h1>Human stories & ideas</h1>
+        <p class="lead">A place to read, write, and deepen your understanding</p>
+        <a href="@Url.Action("Register","Guest")" class="btn btn-black">Start To Journey</a>
+    </div>
+</section>
+
+<!-- Makaleler Bölümü -->
+<section class="articles-section">
+    <div class="articles-grid">
+        @foreach (var article in Model)
+        {
+            <div class="article-card">              
+                <div class="article-content">
+                    <h3 class="article-title">@article.Title</h3>
+                    <p class="article-description">@article.Content</p>
+                    <p class="article-author">Yazar: @article.PublishedAt</p>
+                </div>
+            </div>
+        }
+    </div>
+</section>

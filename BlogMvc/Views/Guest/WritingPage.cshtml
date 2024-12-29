@@ -1,0 +1,114 @@
+﻿@model BlogMvc.ViewModel.PostViewModel
+
+@{
+    ViewData["Title"] = "Write a New Post";
+    Layout = "~/Views/Shared/_writePageLayout.cshtml";
+}
+
+<style>
+    /* Form Stilleri */
+    .writing-form {
+        max-width: 800px;
+        margin: 100px auto;
+        padding: 40px;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .writing-form h2 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+        font-family: 'Merriweather', serif;
+    }
+
+    .writing-form label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+        color: #555;
+    }
+
+    .writing-form input[type="text"],
+    .writing-form textarea,
+    .writing-form input[type="date"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px; /* Köşeler yuvarlak */
+        margin-bottom: 20px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .writing-form input[type="text"]:focus,
+    .writing-form textarea:focus,
+    .writing-form input[type="date"]:focus {
+        border-color: #007BFF;
+        outline: none;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .writing-form textarea {
+        height: 200px;
+        resize: vertical;
+    }
+
+    .writing-form button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 8px; /* Köşeler yuvarlak */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .writing-form button:hover {
+                background-color: #02b517;
+    }
+
+    /* Hata Mesajları */
+    .text-danger {
+        font-size: 12px;
+        color: #dc3545;
+        margin-top: 5px;
+    }
+</style>
+
+<!-- Yazı Yazma Formu -->
+<section class="writing-form">
+    <h2>Write a New Post</h2>
+    <form asp-controller="Guest" asp-action="WritingPage" method="post">
+        <input type="hidden" asp-for="GuestId"  /> <!-- GuestId'yi gizli input olarak sakla -->
+        <div>
+            <label asp-for="Title">Title</label>
+            <input asp-for="Title" placeholder="Enter the title of your post" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Content">Content</label>
+            <textarea asp-for="Content" placeholder="Write your post here..."></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Tags">Tags</label>
+            <input asp-for="Tags" placeholder="Enter tags (comma separated)" />
+            <span asp-validation-for="Tags" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="PublishedAt">Publish Date</label>
+            <input asp-for="PublishedAt" type="date" />
+            <span asp-validation-for="PublishedAt" class="text-danger"></span>
+        </div>
+        <button type="submit">Publish</button>
+    </form>
+</section>

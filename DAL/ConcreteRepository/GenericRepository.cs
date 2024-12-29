@@ -33,9 +33,9 @@ namespace DAL.ConcreteRepository
             await _context.SaveChangesAsync();
         }
 
-        public Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
-            return _entities.ToListAsync();
+            return await _entities.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int Id)

@@ -31,9 +31,9 @@ namespace BLL.ConcreteService
             await _genericRepository.DeleteAsync(Id);
         }
 
-        public async Task<List<UserDto>> GetAllPostAsync()
+        public async Task<List<PostDto>> GetAllPostAsync()
         {
-            return _mapper.Map<List<UserDto>>(await _genericRepository.GetAllAsync());    
+            return _mapper.Map<List<PostDto>>(await _genericRepository.GetAllAsync());    
         }
 
         public async Task UpdatepostAsync(PostDto postDto, int Id)

@@ -1,0 +1,119 @@
+﻿@model BlogMvc.ViewModel.GuestViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Ulasium</title>
+    <style>
+        /* Genel Stiller */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Sayfanın tam ortasında olması için */
+        }
+       
+        /* Form Container */
+        #loginForm {
+            max-width: 400px; /* Form genişliği */
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px; /* Köşeler yumuşak */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+            margin: 50px auto; /* Formu ortala ve üstten boşluk ekle */
+        }
+
+        /* Başlık Stili */
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Input Alanları */
+        #loginForm div {
+            margin-bottom: 15px; /* Boşluk azaltıldı */
+        }
+
+        #loginForm label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        #loginForm input[type="text"],
+        #loginForm input[type="password"] {
+            width: 100%;
+            padding: 8px; /* Padding azaltıldı */
+            font-size: 14px; /* Yazı boyutu küçültüldü */
+            border: 1px solid #e0e0e0;
+            border-radius: 8px; /* Köşeler yuvarlak */
+            box-sizing: border-box;
+        }
+
+        #loginForm input[type="text"]:focus,
+        #loginForm input[type="password"]:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Buton */
+        #loginForm button {
+            width: 100%;
+            padding: 8px 12px; /* Padding küçültüldü */
+            font-size: 14px; /* Yazı boyutu küçültüldü */
+            font-weight: bold;
+            color: #fff; /* Yazı rengi beyaz */
+            background-color: #000; /* Arka plan rengi siyah */
+            border: none; /* Kenarlık kaldırıldı */
+            border-radius: 8px; /* Köşeler yuvarlak */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Geçiş efekti */
+        }
+
+        #loginForm button:hover {
+            background-color: #333; /* Hover durumunda arka plan rengi açık gri */
+            color: #fff; /* Yazı rengi beyaz kalacak */
+        }
+
+        /* Hata Mesajları */
+        .text-danger {
+            color: #dc3545;
+            font-size: 12px; /* Yazı boyutu küçültüldü */
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>    
+    <!-- Login Form -->
+    <form asp-controller="Guest" asp-action="Login" method="post" id="loginForm">
+        <h2>Login to Ulasium</h2>
+        <div>
+            <label asp-for="Mail">Mail</label>
+            <input asp-for="Mail" id="mailInput"  placeholder="Mail adresinizi giriniz." />
+            <span asp-validation-for="Mail" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Şifre</label>
+            <input asp-for="Password" type="password" placeholder="Şifrenizi giriniz." />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

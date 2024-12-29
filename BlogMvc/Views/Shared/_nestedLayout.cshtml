@@ -1,0 +1,94 @@
+﻿@model BlogMvc.ViewModel.GuestViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medium Style Header</title>
+    <style>
+        /* Genel Stiller */
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo */
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* User Actions */
+        header .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Butonlar ve avatar arasındaki boşluk */
+        }
+
+        /* Write Butonu */
+        header .user-actions .write-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background-color: #000;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        header .user-actions .write-button:hover {
+            background-color: #333;
+        }
+
+        /* Avatar */
+        header .user-actions .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #ccc; /* Varsayılan avatar rengi */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Logo -->
+        <div class="logo">Ulasium</div>
+
+        <!-- User Actions -->
+        <div class="user-actions">
+            <!-- Write Butonu -->
+            <a href="@Url.Action("WritingPage","Guest",new { Id=Model.Id })"  class="write-button">Write</a>
+
+            <!-- Avatar -->
+            <div class="avatar">@Model.Name.Substring(0,1)</div>
+        </div>
+    </header>
+    <!-- Render Body -->
+    <main class="container mt-4">
+        @RenderBody()
+    </main>
+</body>
+</html>

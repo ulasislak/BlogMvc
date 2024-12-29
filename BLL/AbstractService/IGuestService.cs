@@ -13,5 +13,7 @@ namespace BLL.AbstractService
         Task UpdateGuestAsync(GuestDto guestDto, int Id);
         Task DeleteGuestAsync(int Id);
         Task<List<GuestDto>> GetAllGuestAsync();
+        Task<GuestDto> GetGuestByIdAsync(int Id);
+
     }
 }

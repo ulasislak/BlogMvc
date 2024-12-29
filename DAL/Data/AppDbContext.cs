@@ -18,6 +18,6 @@ namespace DAL.Data
 
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<User> Users  { get; set; }
+       
     }
 }

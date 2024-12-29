@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Hosting;
 
-namespace DAL.Entities
+namespace BlogMvc.ViewModel
 {
-    public class Guest:BaseClass
+    public class GuestViewModel:BaseVm
     {
         public string Mail { get; set; }
         public string Name { get; set; }
@@ -14,6 +10,6 @@ namespace DAL.Entities
         public string Password { get; set; }
         public string? Bio { get; set; }
         public string? ProfilePic { get; set; }
-        public List<Post> Posts { get; set; }
+        public List<PostViewModel> Posts { get; set; }
     }
 }
