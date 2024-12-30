@@ -15,5 +15,6 @@ namespace DAL.Entities
         public string? Views { get; set; }      
         public int? GuestId { get; set; }       
         public Guest Guests { get; set; }
+        public string Name { get; set; } // Yazarın adı
     }
 }

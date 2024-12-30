@@ -1,5 +1,66 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<BlogMvc.ViewModel.PostViewModel>
+
 @{
+    ViewData["Title"] = "My Posts";
+    Layout = "~/Views/Shared/_nestedLayout.cshtml";
 }
+
+<style>
+    .post-list {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .post-card {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .post-content {
+        font-size: 1em;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .post-meta {
+        font-size: 0.9em;
+        color: #888;
+    }
+</style>
+
+<div class="post-list">
+    <h1>My Posts</h1>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var post in Model)
+        {
+            <div class="post-card">
+                <h2 class="post-title">@post.Title</h2>
+                <p class="post-content">@post.Content</p>
+                <div class="post-meta">
+                   
+                    <span>ID: @(post.Id!= 0)</span>
+
+                    <span>Published on: @post.PublishedAt?.ToString("yyyy-MM-dd")</span> |
+                    <span>Tags: @post.Tags</span>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No posts available.</p>
+    }
+</div>

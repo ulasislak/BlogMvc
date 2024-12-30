@@ -100,6 +100,11 @@
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <div>
+            <label asp-for="Name">Name</label>
+            <textarea asp-for="Name" placeholder="Write your Author"></textarea>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
             <label asp-for="Tags">Tags</label>
             <input asp-for="Tags" placeholder="Enter tags (comma separated)" />
             <span asp-validation-for="Tags" class="text-danger"></span>
@@ -109,6 +114,6 @@
             <input asp-for="PublishedAt" type="date" />
             <span asp-validation-for="PublishedAt" class="text-danger"></span>
         </div>
-        <button type="submit">Publish</button>
+        <button  type="submit">Publish</button>
     </form>
 </section>

@@ -18,12 +18,12 @@ namespace DAL.ConcreteRepository
         public GenericRepository(AppDbContext context)
         {
             _context = context;
-            _entities=_context.Set<T>();
+            _entities = _context.Set<T>();
         }
         public async Task AddAsync(T entity)
         {
             await _entities.AddAsync(entity);
-            await _context.SaveChangesAsync();  
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int Id)
@@ -46,9 +46,17 @@ namespace DAL.ConcreteRepository
 
         public async Task UpdateAsync(T entity, int Id)
         {
-            var UptadeToItem=await GetByIdAsync(Id);    
-            entity.CreatedTime = DateTime.Now;
-            _entities.Update(UptadeToItem);
+            var existingEntity = await GetByIdAsync(entity.Id);
+            if (existingEntity != null)
+            {
+                _context.Entry(existingEntity).CurrentValues.SetValues(entity);
+
+                entity.CreatedTime = DateTime.Now;
+
+                _entities.Update(existingEntity);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
+

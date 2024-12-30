@@ -15,5 +15,6 @@ namespace BLL.AllDto
         public string? Views { get; set; }       
         public int? GuestId { get; set; }    
         public GuestDto Guests { get; set; }
+        public string Name { get; set; } // Yazarın adı
     }
 }

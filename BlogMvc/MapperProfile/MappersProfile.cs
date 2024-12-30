@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.AllDto;
 using BlogMvc.ViewModel;
+using DAL.Entities;
 
 namespace BlogMvc.MapperProfile
 {
@@ -8,14 +9,18 @@ namespace BlogMvc.MapperProfile
     {
         public MappersProfile()
         {
-            // GuestDto <-> GuestViewModel için mapleme
             CreateMap<GuestDto, GuestViewModel>().ReverseMap();
 
-            // PostDto <-> PostViewModel için mapleme
-            CreateMap<PostDto, PostViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()) // PostDto -> PostViewModel için Id alanını ihmal et
-                .ReverseMap()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()); // PostViewModel -> PostDto için Id alanını ihmal et
+            // PostDto <-> PostViewModel
+            CreateMap<PostDto, PostViewModel>().ReverseMap();
+
+            // Post -> PostViewModel
+            CreateMap<Post, PostViewModel>()
+                .ForMember(dest => dest.Guests, opt => opt.MapFrom(src => src.Guests)) // Guest bilgisini eşle
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Guests.Name)); // Yazarın adını eşle
+
+            // Guest -> GuestViewModel
+            CreateMap<Guest, GuestViewModel>().ReverseMap();
         }
     }
-}
+    }

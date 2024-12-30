@@ -11,5 +11,6 @@ namespace BlogMvc.ViewModel
         public string? Bio { get; set; }
         public string? ProfilePic { get; set; }
         public List<PostViewModel> Posts { get; set; }
+        public List<string>? FollowedTags { get; set; } = new List<string>();
     }
 }

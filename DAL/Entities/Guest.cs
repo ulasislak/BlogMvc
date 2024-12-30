@@ -15,5 +15,6 @@ namespace DAL.Entities
         public string? Bio { get; set; }
         public string? ProfilePic { get; set; }
         public List<Post> Posts { get; set; }
+        public List<string>? FollowedTags { get; set; } = new List<string>();
     }
 }

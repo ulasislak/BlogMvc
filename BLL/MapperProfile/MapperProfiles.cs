@@ -15,11 +15,12 @@ namespace BLL.MapperProfile
         public MapperProfiles()
         {
             CreateMap<GuestDto,Guest>().ReverseMap();
-            CreateMap<PostDto, Post>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()); 
+            CreateMap<PostDto, Post>();
 
-            CreateMap<Post, PostDto>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            
+
+            CreateMap<Post, PostDto>();
+               
 
         }
     }

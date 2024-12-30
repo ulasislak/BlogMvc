@@ -1,0 +1,116 @@
+﻿@model BlogMvc.ViewModel.GuestViewModel
+
+@{
+    ViewData["Title"] = "Author Profile";
+    Layout = "~/Views/Shared/_nestedLayout.cshtml";
+}
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .author-info {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .author-info h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .author-info p {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+    .posts-section {
+        margin-top: 20px;
+    }
+
+    .post-card {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        background-color: #fff;
+        transition: box-shadow 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+        .post-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .post-card p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .post-card small {
+            display: block;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+    .back-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="container">
+    <div class="author-info">
+        <h1>@Model.Name</h1>
+        <p>@Model.Bio</p>
+    </div>
+
+    <div class="posts-section">
+        <h2>Posts by @Model.Name</h2>
+        @if (Model.Posts != null && Model.Posts.Any())
+        {
+            foreach (var post in Model.Posts)
+            {
+                <a class="post-card" href="@Url.Action("ReadingPage", "Guest", new { id = post.Id })">
+                    <h3>@post.Title</h3>
+                    <p>@post.Content</p>
+                    <small>Published on: @post.PublishedAt?.ToString("yyyy-MM-dd")</small>
+                    <small>Tags: @post.Tags</small>
+                </a>
+            }
+        }
+        else
+        {
+            <p>No posts available.</p>
+        }
+    </div>
+
+    <a href="@Url.Action("HomePage", "Guest", new { id = Model.Id })" class="back-button">Back to Home</a>
+</div>

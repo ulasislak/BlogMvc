@@ -22,16 +22,16 @@
         margin-bottom: 40px;
     }
 
-    .welcome-section h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-    .welcome-section p {
-        font-size: 1.2rem;
-        color: #666;
-    }
+        .welcome-section p {
+            font-size: 1.2rem;
+            color: #666;
+        }
 
     .posts-section {
         background-color: #fff;
@@ -47,70 +47,248 @@
         border-radius: 8px;
         background-color: #fff;
         transition: box-shadow 0.3s ease;
-    }
-
-    .post-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .post-card h3 {
-        font-size: 1.8rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #333;
-    }
-
-    .post-card p {
-        font-size: 1.1rem;
-        color: #555;
-        margin-bottom: 15px;
-    }
-
-    .post-card small {
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
         display: block;
+    }
+
+        .post-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .post-card p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 15px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .post-card small {
+            display: block;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+            .post-card small:not(:last-child) {
+                margin-bottom: 5px;
+            }
+
+    .read-more {
+        color: #007bff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+    .tags-section {
+        margin-bottom: 20px;
+    }
+
+        .tags-section h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+    .tags-list {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+        .tags-list::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .tags-list::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .tags-list::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+    .tag {
+        background-color: #e9ecef;
+        padding: 5px 10px;
+        border-radius: 12px;
         font-size: 0.9rem;
-        color: #888;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
     }
 
-    .post-card small:not(:last-child) {
-        margin-bottom: 5px;
+        .tag:hover {
+            background-color: #d3d9df;
+        }
+
+        .tag.followed {
+            background-color: #c3e6cb;
+        }
+
+    .follow-button {
+        background: none;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
     }
 
-    .no-posts {
-        text-align: center;
-        font-size: 1.2rem;
-        color: #666;
-        padding: 20px;
-    }
+        .follow-button:hover {
+            color: #007bff;
+        }
+
+        .follow-button.followed {
+            color: #28a745;
+        }
 </style>
 
 <div class="container">
-    <!-- Welcome Section -->
     <div class="welcome-section">
         <h1>Welcome to Ulasium</h1>
         <p>Welcome @Model.Name!</p>
     </div>
 
-    <!-- Posts Section -->
+    <div class="tags-section">
+        <h2>Followed Tags</h2>
+        <div class="tags-list" id="followed-tags">
+            @if (Model.FollowedTags != null && Model.FollowedTags.Any())
+            {
+                foreach (var tag in Model.FollowedTags)
+                {
+                    <div class="tag followed" data-tag="@tag">
+                        <span>@tag</span>
+                        <button class="follow-button followed" onclick="toggleFollowTag('@tag')">✓</button>
+                    </div>
+                }
+            }
+            else
+            {
+                <span>No followed tags.</span>
+            }
+        </div>
+
+        <h2>All Tags</h2>
+        <div class="tags-list" id="all-tags">
+            @if (ViewBag.AllTags != null && ViewBag.AllTags.Count > 0)
+            {
+                foreach (var tag in ViewBag.AllTags)
+                {
+                    <div class="tag @(Model.FollowedTags.Contains(tag) ? "followed" : "")" data-tag="@tag">
+                        <span>@tag</span>
+                        <button class="follow-button @(Model.FollowedTags.Contains(tag) ? "followed" : "")"
+                                onclick="toggleFollowTag('@tag')">
+                            @(Model.FollowedTags.Contains(tag) ? "✓" : "+")
+                        </button>
+                    </div>
+                }
+            }
+            else
+            {
+                <span>No tags available.</span>
+            }
+        </div>
+    </div>
+
     <div class="posts-section">
-        <h2>All Posts</h2>
+        <h2>Followed Posts</h2>
         @if (Model.Posts != null && Model.Posts.Any())
         {
             <div>
                 @foreach (var post in Model.Posts)
                 {
-                    <div class="post-card">
+                    <a class="post-card" asp-controller="Guest" asp-action="ReadingPage" asp-route-id="@post.Id">
                         <h3>@post.Title</h3>
                         <p>@post.Content</p>
                         <small>Published on: @post.PublishedAt?.ToString("yyyy-MM-dd")</small>
                         <small>Tags: @post.Tags</small>
-                    </div>
+                        <span class="read-more">Read More</span>
+                    </a>
                 }
             </div>
         }
         else
         {
-            <p class="no-posts">No posts available.</p>
+            <p class="no-posts">No posts available for followed tags.</p>
         }
     </div>
 </div>
+
+<script>
+    function toggleFollowTag(tag) {
+        const guestId = @Model.Id; // Model'den Id'yi al
+
+        fetch(`/Guest/ToggleFollowTag?tag=${encodeURIComponent(tag)}&Id=${guestId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                const tagElement = document.querySelector(`#all-tags .tag[data-tag="${tag}"]`);
+                const followedTagsSection = document.getElementById('followed-tags');
+
+                if (tagElement.classList.contains('followed')) {
+                    tagElement.classList.remove('followed');
+                    tagElement.querySelector('.follow-button').textContent = '+';
+
+                    const followedTagElement = followedTagsSection.querySelector(`.tag[data-tag="${tag}"]`);
+                    if (followedTagElement) {
+                        followedTagsSection.removeChild(followedTagElement);
+                    }
+                } else {
+                    tagElement.classList.add('followed');
+                    tagElement.querySelector('.follow-button').textContent = '✓';
+
+                    const newTagElement = document.createElement('div');
+                    newTagElement.className = 'tag followed';
+                    newTagElement.setAttribute('data-tag', tag);
+                    newTagElement.innerHTML = `
+                                <span>${tag}</span>
+                                <button class="follow-button followed" onclick="toggleFollowTag('${tag}')">✓</button>
+                            `;
+                    followedTagsSection.appendChild(newTagElement);
+                }
+
+                fetch(`/Guest/HomePage/${guestId}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const postsSection = doc.querySelector('.posts-section');
+                        if (postsSection) {
+                            document.querySelector('.posts-section').innerHTML = postsSection.innerHTML;
+                        }
+                    });
+            }
+        });
+    }
+</script>

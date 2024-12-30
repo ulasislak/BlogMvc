@@ -15,5 +15,6 @@ namespace BLL.AllDto
         public string? Bio { get; set; }
         public string? ProfilePic { get; set; }
         public List<PostDto> Posts { get; set; }
+        public List<string>? FollowedTags { get; set; } = new List<string>();
     }
 }
